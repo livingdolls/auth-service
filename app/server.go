@@ -13,12 +13,13 @@ func StartServer() {
 	database := db.ConnectDB()
 
 	userRepo := repository.NewUserRepository(database)
-
 	authService := service.NewAuthService(userRepo)
-
 	authHandler := handler.NewAuthHandler(authService)
 
-	r := router.SetupRouter(authHandler)
+	userService := service.NewUserService(userRepo)
+	userHandler := handler.NewUserHandler(userService)
+
+	r := router.SetupRouter(authHandler, userHandler)
 
 	r.Run(":8080")
 }

@@ -8,3 +8,7 @@ type UserResponse struct {
 	Email     string    `json:"email"`
 	CreatedAt time.Time `json:"created_at"`
 }
+
+type UserGetByEmailRequest struct {
+	Email string `json:"email" binding:"required,email"`
+}
